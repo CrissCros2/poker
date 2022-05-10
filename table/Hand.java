@@ -145,11 +145,8 @@ public class Hand{
 			flush = true;
 		}
 
-		straightFlush = checkStraightFlush();
-		if (flush && straight){
-			straightFlush = true;
-		}
-
+		straightFlush = checkStraightFlush(spade,diamond,club,heart);
+		
 		if (straightFlush) {
 			return 9;
 		}else if (fourOfKind) {
@@ -172,15 +169,24 @@ public class Hand{
 	}
 
 	public boolean checkStraightFlush(int spade, int diamond, int club, int heart){
-		if (spade == 5) {
-			checkStraightSuit(SPADE);
-		}else if (diamond == 5) {
-			checkStraightSuit(DIAMOND);
-		}else if (club == 5) {
-			checkStraightSuit(CLUB);
-		}else if (heart == 5) {
-			checkStraightSuit(HEART);
+		if (spade >= 5) {
+			if (checkStraightSuit(Suit.SPADE)){
+				return true;
+			}
+		}else if (diamond >= 5) {
+			if (checkStraightSuit(Suit.DIAMOND)){
+				return true;
+			}
+		}else if (club >= 5) {
+			if (checkStraightSuit(Suit.CLUB)){
+				return true;
+			}
+		}else if (heart >= 5) {
+			if (checkStraightSuit(Suit.HEART)){
+				return true;
+			}
 		}
+		return false;
 	}
 
 	public boolean checkStraightSuit(Suit suit){
@@ -194,12 +200,11 @@ public class Hand{
 				}
 			}
 		}
-		Collections.sort(cardNums);
-		for (int startNum = 0; startNum<fullHand.size()-4; startNum++) {
-			int dif1 = fullHand.get(startNum+1).getNum()- fullHand.get(startNum).getNum();
-			int dif2 = fullHand.get(startNum+2).getNum()- fullHand.get(startNum+1).getNum();
-			int dif3 = fullHand.get(startNum+3).getNum()- fullHand.get(startNum+2).getNum();
-			int dif4 = fullHand.get(startNum+4).getNum()- fullHand.get(startNum+3).getNum();
+		for (int startNum = 0; startNum<cardNums.size()-4; startNum++) {
+			int dif1 = cardNums.get(startNum+1) - cardNums.get(startNum);
+			int dif2 = cardNums.get(startNum+2) - cardNums.get(startNum+1);
+			int dif3 = cardNums.get(startNum+3) - cardNums.get(startNum+2);
+			int dif4 = cardNums.get(startNum+4) - cardNums.get(startNum+3);
 			if (dif1 == 1 && dif2 == 1 && dif3 == 1 && dif4 == 1) {
 				return true;
 			}
@@ -219,11 +224,11 @@ public class Hand{
 			}
 		}
 		Collections.sort(cardNums);
-		for (int startNum = 0; startNum<fullHand.size()-4; startNum++) {
-			int dif1 = fullHand.get(startNum+1).getNum()- fullHand.get(startNum).getNum();
-			int dif2 = fullHand.get(startNum+2).getNum()- fullHand.get(startNum+1).getNum();
-			int dif3 = fullHand.get(startNum+3).getNum()- fullHand.get(startNum+2).getNum();
-			int dif4 = fullHand.get(startNum+4).getNum()- fullHand.get(startNum+3).getNum();
+		for (int startNum = 0; startNum<cardNums.size()-4; startNum++) {
+			int dif1 = cardNums.get(startNum+1) - cardNums.get(startNum);
+			int dif2 = cardNums.get(startNum+2) - cardNums.get(startNum+1);
+			int dif3 = cardNums.get(startNum+3) - cardNums.get(startNum+2);
+			int dif4 = cardNums.get(startNum+4) - cardNums.get(startNum+3);
 			if (dif1 == 1 && dif2 == 1 && dif3 == 1 && dif4 == 1) {
 				return true;
 			}
