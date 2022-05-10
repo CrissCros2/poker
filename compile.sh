@@ -1,0 +1,1 @@
+javac driver/PokerDriver.java table/*.java cards/*.java -d ./bin/
