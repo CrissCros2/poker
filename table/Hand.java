@@ -1,6 +1,8 @@
 package table;
 import java.util.ArrayList;
 import cards.*;
+import java.util.Collections;
+
 public class Hand{
 	private ArrayList<Card> fullHand;
 
@@ -143,6 +145,7 @@ public class Hand{
 			flush = true;
 		}
 
+		straightFlush = checkStraightFlush();
 		if (flush && straight){
 			straightFlush = true;
 		}
@@ -168,14 +171,60 @@ public class Hand{
 
 	}
 
-	public boolean checkStraight(){
+	public boolean checkStraightFlush(int spade, int diamond, int club, int heart){
+		if (spade == 5) {
+			checkStraightSuit(SPADE);
+		}else if (diamond == 5) {
+			checkStraightSuit(DIAMOND);
+		}else if (club == 5) {
+			checkStraightSuit(CLUB);
+		}else if (heart == 5) {
+			checkStraightSuit(HEART);
+		}
+	}
+
+	public boolean checkStraightSuit(Suit suit){
+		ArrayList<Integer> cardNums = new ArrayList<Integer>(); 
 		for (int i = 0; i<fullHand.size(); i++) {
-			Card card = fullHand.get(i);
-			Card nextHeart = new Card(Suit.HEART, (card.getNum()+1) % 13);
-			Card nextDiamond = new Card(Suit.DIAMOND, (card.getNum()+1) % 13);
-			Card nextSpade = new Card(Suit.SPADE, (card.getNum()+1) % 13);
-			Card nextClub = new Card(Suit.CLUB, (card.getNum()+1) % 13);
-			if (fullHand.contains(nextHeart) || fullHand.contains(nextDiamond) || fullHand.contains(nextSpade) || fullHand.contains(nextClub)){
+			int num = fullHand.get(i).getNum();
+			if (!cardNums.contains(num) && fullHand.get(i).getSuit() == suit) {
+				cardNums.add(num);
+				if (num == 1) {
+					cardNums.add(14);
+				}
+			}
+		}
+		Collections.sort(cardNums);
+		for (int startNum = 0; startNum<fullHand.size()-4; startNum++) {
+			int dif1 = fullHand.get(startNum+1).getNum()- fullHand.get(startNum).getNum();
+			int dif2 = fullHand.get(startNum+2).getNum()- fullHand.get(startNum+1).getNum();
+			int dif3 = fullHand.get(startNum+3).getNum()- fullHand.get(startNum+2).getNum();
+			int dif4 = fullHand.get(startNum+4).getNum()- fullHand.get(startNum+3).getNum();
+			if (dif1 == 1 && dif2 == 1 && dif3 == 1 && dif4 == 1) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean checkStraight(){
+		ArrayList<Integer> cardNums = new ArrayList<Integer>(); 
+		for (int i = 0; i<fullHand.size(); i++) {
+			int num = fullHand.get(i).getNum();
+			if (!cardNums.contains(num)) {
+				cardNums.add(num);
+				if (num == 1) {
+					cardNums.add(14);
+				}
+			}
+		}
+		Collections.sort(cardNums);
+		for (int startNum = 0; startNum<fullHand.size()-4; startNum++) {
+			int dif1 = fullHand.get(startNum+1).getNum()- fullHand.get(startNum).getNum();
+			int dif2 = fullHand.get(startNum+2).getNum()- fullHand.get(startNum+1).getNum();
+			int dif3 = fullHand.get(startNum+3).getNum()- fullHand.get(startNum+2).getNum();
+			int dif4 = fullHand.get(startNum+4).getNum()- fullHand.get(startNum+3).getNum();
+			if (dif1 == 1 && dif2 == 1 && dif3 == 1 && dif4 == 1) {
 				return true;
 			}
 		}

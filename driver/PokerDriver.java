@@ -7,7 +7,7 @@ public class PokerDriver{
 
 	public static void main(String args[]){
 		int h1Rank = 0;
-		while (h1Rank != 5){
+		while (h1Rank != 9){
 			Hand h1 = new Hand();
 			Hand h2 = new Hand();
 
@@ -52,8 +52,8 @@ public class PokerDriver{
 					System.out.println("draw");
 				}
 			}
+			System.out.println("");
 		}
-		
 	}
 
 }
