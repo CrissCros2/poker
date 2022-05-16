@@ -10,7 +10,7 @@ public class Hand{
 		fullHand = new ArrayList<Card>();
 	}
 
-	public void deal(Card first){
+	public void addToHand(Card first){
 		fullHand.add(first);
 	}
 

@@ -5,6 +5,7 @@ import java.util.Collections;
 public class Table{
 	private static ArrayList<Card> tabCards;
 	private static ArrayList<Card> deck;
+	private static int pot;
 
 	public static void initialiseCards(){
 		tabCards = new ArrayList<Card>();
@@ -119,5 +120,13 @@ public class Table{
 			}
 		}
 		return 0;
+	}
+
+	public static void addToPot(int money){
+		pot += money;
+	}
+
+	public static int getPot(){
+		return pot;
 	}
 }
