@@ -10,24 +10,6 @@ public class Hand{
 		fullHand = new ArrayList<Card>();
 	}
 
-	public void addToHand(Card first){
-		fullHand.add(first);
-	}
-
-	public void flop(Card first, Card second, Card third){
-		fullHand.add(first);
-		fullHand.add(second);
-		fullHand.add(third);
-	}
-
-	public void turn(Card first){
-		fullHand.add(first);
-	}
-
-	public void river(Card first){
-		fullHand.add(first);
-	}
-
 	public void showCards(){
 		for (int i = 0; i<fullHand.size(); i++) {
 			fullHand.get(i).showCard();

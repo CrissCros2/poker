@@ -60,14 +60,7 @@ public class Table{
 		deck.remove(card4);
 	}
 
-	public static void turn(){
-		Card card = deck.get(1);
-		tabCards.add(card);
-		deck.remove(deck.get(0));
-		deck.remove(card);
-	}
-
-	public static void river(){
+	public static void newCard(){
 		Card card = deck.get(1);
 		tabCards.add(card);
 		deck.remove(deck.get(0));
@@ -84,7 +77,7 @@ public class Table{
 		 	if (h2.get(i).getNum() > h2High) {
 		 		h2High = h2.get(i).getNum();
 		 	}
-		 }
+		}
 		switch (rank){
 		case 9:
 			if (h1High > h2High) {
