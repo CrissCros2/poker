@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class PokerDriver{
-
+	private static boolean win;
 	public static void main(String args[]) throws IOException{
 		int h1Rank = 0;
 		int h2Rank = 0;
@@ -38,13 +38,22 @@ public class PokerDriver{
 		p2.showCards();
 		System.out.println("");
 
-		System.out.println(currentSmallBlind.getName() + " Do you wish to bet, call or fold?");
-		System.out.println("1. Bet");
-		System.out.println("2. Call");
-		System.out.println("3. Fold");
-		System.out.println("");
-		int inp = getInput();
-		System.out.println(inp);
+		int sel = getSelection(currentSmallBlind.getName());
+
+		switch (sel){
+			case 1:
+				int inp = 0;
+				System.out.println("Enter how much: ");
+				do{
+					inp = getInput();
+				}while (inp < bigBlind/2);
+				currentSmallBlind.bet(inp);
+			case 2:
+				currentSmallBlind.bet(bigBlind/2);
+			case 3:
+				currentSmallBlind.fold();
+				win(p1.getFold(), p2.getFold());
+		}
 
 		Table.flop();
 		p1.addToHand(Table.getTabCard(0)); p2.addToHand(Table.getTabCard(0));
@@ -90,4 +99,28 @@ public class PokerDriver{
 		return Integer.parseInt(data);
 	}
 
+	private static int getSelection(String name) throws IOException{
+		int inp = 0;
+		do{
+			System.out.println(name + " Do you wish to bet, call or fold?");
+			System.out.println("1. Bet");
+			System.out.println("2. Call");
+			System.out.println("3. Fold");
+			System.out.println("");
+			inp = getInput();
+		}while (inp < 4);
+		return inp;
+	}
+
+	private static void win(boolean p1, boolean p2){
+		if (p1 == true && p2 == false){
+			win = true;
+			System.out.println("P2 Wins");
+		}else if (p1 == false && p2 == true){
+			win = true;
+			System.out.println("P1 Wins");
+		}else{
+			win = false;
+		}
+	}
 }

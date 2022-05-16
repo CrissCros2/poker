@@ -7,6 +7,7 @@ public class Player {
     private int money;
     private ArrayList<Card> fullHand;
     private String name;
+    private boolean fold;
 
     public Player(int buyIn, String newName){
         money = buyIn;
@@ -22,13 +23,12 @@ public class Player {
 		fullHand.add(first);
 	}
 
-    public boolean bet(int betAmount){
+    public void bet(int betAmount){
         if (betAmount <= money){
             Table.addToPot(betAmount);
             money -= betAmount;
-            return true;
         }
-        return false;
+        System.out.println("Not enough money!");
     }
 
     public void showCards(){
@@ -238,5 +238,13 @@ public class Player {
 		}
 		return false;
 	}
+
+    public void fold(){
+        fold = true;
+    }
+
+    public boolean getFold(){
+        return fold;
+    }
 
 }

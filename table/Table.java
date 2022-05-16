@@ -122,4 +122,14 @@ public class Table{
 	public static int getPot(){
 		return pot;
 	}
+
+	public static int checkFold(boolean p1, boolean p2){
+		if (p1 == true && p2 == false){
+			return 1;
+		}else if (p1 == false && p2 == true){
+			return -1;
+		}else{
+			return 0;
+		}
+	}
 }
